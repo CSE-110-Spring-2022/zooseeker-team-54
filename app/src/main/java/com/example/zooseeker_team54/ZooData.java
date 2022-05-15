@@ -19,7 +19,14 @@ import org.jgrapht.Graph;
 import org.jgrapht.graph.DefaultUndirectedWeightedGraph;
 import org.jgrapht.nio.json.JSONImporter;
 
+/**
+ * Class representing the data of the Zoo
+ */
 public class ZooData {
+
+    /**
+     * Nested class for info of the Vertex in the graph
+     */
     public static class VertexInfo {
         public static enum Kind {
             // The SerializedName annotation tells GSON how to convert
@@ -29,17 +36,28 @@ public class ZooData {
             @SerializedName("intersection") INTERSECTION
         }
 
+        // member variables of VertexInfo
         public String id;
         public Kind kind;
         public String name;
         public List<String> tags;
     }
 
+    /**
+     * Nested class for info of the edge
+     */
     public static class EdgeInfo {
+        // member variables of EdgeInfo
         public String id;
         public String street;
     }
 
+    /**
+     * Method to load vertex info from a JSON file
+     * @param path file path of the JSON file
+     * @param context given context
+     * @return a map representing the vertices of the Zoo
+     */
     public static Map<String, ZooData.VertexInfo> loadVertexInfoJSON(String path, Context context) {
         InputStream inputStream = null;
         try {
@@ -60,6 +78,12 @@ public class ZooData {
         return indexedZooData;
     }
 
+    /**
+     * Method to load edge info from a JSON file
+     * @param path file path for the JSON file
+     * @param context given context
+     * @return a map representing the edges of the Zoo
+     */
     public static Map<String, ZooData.EdgeInfo> loadEdgeInfoJSON(String path, Context context) {
         InputStream inputStream = null;
         try {
@@ -80,6 +104,12 @@ public class ZooData {
         return indexedZooData;
     }
 
+    /**
+     * Method to load a ZooGraph from a JSON file
+     * @param path file path for the JSON file
+     * @param context given context
+     * @return returns the Graph of the Zoo
+     */
     public static Graph<String, IdentifiedWeightedEdge> loadZooGraphJSON(String path, Context context) {
         // Create an empty graph to populate.
         Graph<String, IdentifiedWeightedEdge> g = new DefaultUndirectedWeightedGraph<>(IdentifiedWeightedEdge.class);

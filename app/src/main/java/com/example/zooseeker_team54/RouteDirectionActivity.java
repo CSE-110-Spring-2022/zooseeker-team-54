@@ -16,13 +16,17 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Displays the directions to get to a specific exhibit in the route o planned exhibits
+ *  Class to represent the functionality of RouteDirectionActivity
  */
 public class RouteDirectionActivity extends AppCompatActivity {
     private ViewModel viewModel;
     DirectionsDisplayRecyclerView display;
     DirectionsDisplayNextButton button;
 
+    /**
+     * Create the activity from a given savedInstanceState and initialize everything
+     * @param savedInstanceState saved instance from before
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +47,24 @@ public class RouteDirectionActivity extends AppCompatActivity {
         button.initializeButton();
     }
 
+    /**
+     * Finishes the activity and goes back to the previous activity
+     * @param view
+     */
     public void onBackToPlanBtnClicked(View view){ finish(); }
 
+    /**
+     * Getter method for the display
+     * @return RecyclerView of the directions
+     */
     public DirectionsDisplayRecyclerView getDisplayView() {
         return this.display;
     }
 
+    /**
+     * Getter method for the button
+     * @return Button for "Next"
+     */
     public DirectionsDisplayNextButton getButton () {
         return this.button;
     }

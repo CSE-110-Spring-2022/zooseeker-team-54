@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Activity to show the route of exhibits on our plan. Launched when "Plan" is clicked
+ * on MainActivity
+ */
 public class ShowRouteActivity extends AppCompatActivity {
     public RecyclerView showRouteView;
 
@@ -22,6 +26,10 @@ public class ShowRouteActivity extends AppCompatActivity {
 
     private HashMap<String, List<LocEdge>> route;
 
+    /**
+     * Create the activity from a given savedInstanceState and initialize everything
+     * @param savedInstanceState the saved instance from before
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,19 +47,29 @@ public class ShowRouteActivity extends AppCompatActivity {
         showRouteView.setAdapter(showRouteAdapter);
 
         viewModel.getAllPlannedUnvisitedLive()
-                .observe(this, showRouteAdapter::setLocItems);
+                .observe(this, showRouteAdapter::setItems);
 
     }
+
+    /**
+     * Back out of the activity when the "Back" button is clicked
+     * @param view View that's passed in
+     */
     public void onBackButtonClicked (View view) {
         finish();
     }
 
+    /**
+     * Function for when the Direction button is clicked, and launches the RouteDirectionActivity
+     * @param view
+     */
     public void onDirectionBtnClicked (View view) {
         Intent intent = new Intent(this, RouteDirectionActivity.class);
 
         // todo: discuss if we really need to pass direction
         LocItem target = viewModel.getNextUnvisitedExhibit();
 
+        // show an alert if target doesn't exist or is null
         if (target == null) {
             String alertMessage = "All exhibits visited! " + "" +
                                 "Please clear all selections on the previous page " +

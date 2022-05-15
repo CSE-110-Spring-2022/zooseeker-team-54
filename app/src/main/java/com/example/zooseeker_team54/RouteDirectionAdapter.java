@@ -42,28 +42,24 @@ public class RouteDirectionAdapter extends RecyclerView.Adapter<RouteDirectionAd
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RouteDirectionAdapter.ViewHolder holder, int position) {
-        holder.setLocEdge(locEdges.get(position));
+    public void onBindViewHolder(@NonNull GeneralRecyclerAdapter.ViewHolder holder, int position) {
+        ((RouteDirectionAdapter.ViewHolder) holder).setItem(getItems().get(position));
     }
 
-    @Override
-    public int getItemCount() { return locEdges.size(); }
-
-    public LocEdge getItemAtIndex(int index) {
-        return locEdges.get(index);
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder{
-        private LocEdge  locEdge;
+    public class ViewHolder extends GeneralRecyclerAdapter.ViewHolder{
         private TextView directionGuideText;
 
+        /**
+         * Constructor for ViewHolder
+         * @param itemView given View to be used
+         */
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             this.directionGuideText = itemView.findViewById(R.id.direction);
         }
 
-        public void setLocEdge(LocEdge locEdge){
-            this.locEdge = locEdge;
+        public void setItem(LocEdge locEdge){
+            super.setItem(locEdge);
             this.directionGuideText.setText(locEdge.toString());
         }
     }

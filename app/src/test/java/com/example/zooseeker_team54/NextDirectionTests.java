@@ -23,6 +23,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+// User Story 5, 6 Unit Tests
 @RunWith(AndroidJUnit4.class)
 public class NextDirectionTests {
     List<LocEdge> directions;
@@ -87,6 +88,4 @@ public class NextDirectionTests {
             assertEquals(true, btn.isEnabled());
         });
     }
-
-
 }

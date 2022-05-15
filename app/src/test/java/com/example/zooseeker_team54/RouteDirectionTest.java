@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+// User Story 4 Unit Tests
 @RunWith(AndroidJUnit4.class)
 public class RouteDirectionTest {
     List<LocEdge> directions;

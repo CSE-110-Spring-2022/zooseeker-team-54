@@ -9,6 +9,9 @@ import androidx.room.Update;
 
 import java.util.List;
 
+/**
+ * Dao interface for our LocItems
+ */
 @Dao
 public interface LocItemDao {
     @Insert

@@ -17,17 +17,30 @@ import org.jgrapht.Graph;
 import org.jgrapht.GraphPath;
 import org.jgrapht.alg.shortestpath.DijkstraShortestPath;
 
+/**
+ * Utilities class for the findShortestPathBetween function and to create Alerts
+ */
 public class Utilities {
     private static Graph<String, IdentifiedWeightedEdge> g;
     private static Map<String, ZooData.VertexInfo> vInfo;
     private static Map<String, ZooData.EdgeInfo> eInfo;
 
+    /**
+     * Constructor method for Utilities
+     * @param context
+     */
     public Utilities(Context context) {
         g = ZooData.loadZooGraphJSON("sample_zoo_graph.json", context);
         vInfo = ZooData.loadVertexInfoJSON("sample_node_info.json", context);
         eInfo = ZooData.loadEdgeInfoJSON("sample_edge_info.json", context);
     }
 
+    /**
+     * Finds shortest path between two edges
+     * @param start vertex we're starting from
+     * @param goal  vertex we're trying to reach
+     * @return      a pair that consists of the path and the total weight of that path
+     */
     public static Pair<List<LocEdge>, Double> findShortestPathBetween(String start, String goal) {
 
         String current = start, temp;
@@ -35,6 +48,8 @@ public class Utilities {
         GraphPath<String, IdentifiedWeightedEdge> path = DijkstraShortestPath.findPathBetween(g, start, goal);
 
         double sumWeight = 0;
+
+        // iterate through the list of edges
         for (IdentifiedWeightedEdge e : path.getEdgeList()) {
             double weight = g.getEdgeWeight(e);
             String id = e.getId();
@@ -60,6 +75,11 @@ public class Utilities {
         return new Pair<>(shortestPath, sumWeight);
     }
 
+    /**
+     * Method to make showing alerts easier
+     * @param activity Activity to display the alert in
+     * @param message message to be displayed in the alert
+     */
     public static void showAlert(Activity activity, String message) {
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(activity);
 

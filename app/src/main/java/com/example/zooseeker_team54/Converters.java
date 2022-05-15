@@ -10,14 +10,27 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Class to help convert JSONs to lists and vice versa
+ */
 public class Converters {
-    // Store as JSON
+
+    /**
+     * Convert a JSON to a list
+     * @param jsonStr
+     * @return a list from the given JSON
+     */
     @TypeConverter
     public static List<String> fromJsonToList(String jsonStr) {
         Type listType = new TypeToken<ArrayList<String>>() {}.getType();
         return new Gson().fromJson(jsonStr, listType);
     }
 
+    /**
+     * Convert a list to JSON
+     * @param list
+     * @return a JSON from a given list
+     */
     @TypeConverter
     public static String fromListToJson(List<String> list) {
         Gson gson = new Gson();

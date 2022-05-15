@@ -18,6 +18,7 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.List;
 
+// User Story 2 Unit Tests
 @RunWith(AndroidJUnit4.class)
 public class PlanExhibitsTests {
     LocDatabase testDb;
@@ -59,7 +60,7 @@ public class PlanExhibitsTests {
     @Test
     public void emptyPlannedList() {
         scenario.onActivity(activity -> {
-            List<LocItem> plannedExhibits = activity.plannedLocsAdapter.getLocItems();
+            List<LocItem> plannedExhibits = activity.plannedLocsAdapter.getItems();
             assertEquals(0, plannedExhibits.size());
         });
     }
@@ -71,14 +72,14 @@ public class PlanExhibitsTests {
     public void addToEmptyList() {
         scenario.onActivity(activity -> {
             // Check that there are no exhibits planned yet
-            List<LocItem> plannedExhibits = activity.plannedLocsAdapter.getLocItems();
+            List<LocItem> plannedExhibits = activity.plannedLocsAdapter.getItems();
             assertEquals(0, plannedExhibits.size());
 
             // Search for a specific exhibit.
             String query = "arctic fox";
             EditText searchBar = activity.findViewById(R.id.search_bar);
             searchBar.setText(query);
-            List<LocItem> searchResults = activity.searchResultAdapter.getLocItems();
+            List<LocItem> searchResults = activity.searchResultAdapter.getItems();
 
             // Get the search result
             List<LocItem> selectedExhibits = new ArrayList<>();
@@ -86,9 +87,9 @@ public class PlanExhibitsTests {
             assertEquals(1, selectedExhibits.size());
 
             // Add the result to the list of planned exhibits and check for correctness.
-            activity.plannedLocsAdapter.setLocItems(selectedExhibits);
+            activity.plannedLocsAdapter.setItems(selectedExhibits);
             assertEquals(1, activity.plannedLocsAdapter.getItemCount());
-            assertEquals("Arctic Foxes", activity.plannedLocsAdapter.getLocItems().get(0).name);
+            assertEquals("Arctic Foxes", activity.plannedLocsAdapter.getItems().get(0).name);
         });
     }
 
@@ -99,14 +100,14 @@ public class PlanExhibitsTests {
     public void addMultipleExhibits() {
         scenario.onActivity(activity -> {
             // Check that there are no exhibits planned yet
-            List<LocItem> plannedExhibits = activity.plannedLocsAdapter.getLocItems();
+            List<LocItem> plannedExhibits = activity.plannedLocsAdapter.getItems();
             assertEquals(0, plannedExhibits.size());
 
             // Search for a specific exhibit
             String query = "arctic fox";
             EditText searchBar = activity.findViewById(R.id.search_bar);
             searchBar.setText(query);
-            List<LocItem> searchResults = activity.searchResultAdapter.getLocItems();
+            List<LocItem> searchResults = activity.searchResultAdapter.getItems();
 
             // Get the search result
             List<LocItem> selectedExhibits = new ArrayList<>();
@@ -116,16 +117,16 @@ public class PlanExhibitsTests {
             // Search for an exhibit with many variations
             query = "bear";
             searchBar.setText(query);
-            searchResults = activity.searchResultAdapter.getLocItems();
+            searchResults = activity.searchResultAdapter.getItems();
 
             // Set the selected exhibit to "Brown Bears" and add to plan
             selectedExhibits.add(searchResults.get(1));
-            activity.plannedLocsAdapter.setLocItems(selectedExhibits);
+            activity.plannedLocsAdapter.setItems(selectedExhibits);
 
             // Check for correctness
             assertEquals(2, activity.plannedLocsAdapter.getItemCount());
-            assertEquals("Arctic Foxes", activity.plannedLocsAdapter.getLocItems().get(0).name);
-            assertEquals("Brown Bears", activity.plannedLocsAdapter.getLocItems().get(1).name);
+            assertEquals("Arctic Foxes", activity.plannedLocsAdapter.getItems().get(0).name);
+            assertEquals("Brown Bears", activity.plannedLocsAdapter.getItems().get(1).name);
         });
     }
 }

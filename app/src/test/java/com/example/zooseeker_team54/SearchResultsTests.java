@@ -20,11 +20,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import java.util.List;
 import java.util.Locale;
 
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
- */
+// User Story 1 Unit Tests
 @RunWith(AndroidJUnit4.class)
 public class SearchResultsTests {
     LocDatabase testDb;
@@ -55,7 +51,7 @@ public class SearchResultsTests {
             EditText searchBarText = activity.findViewById(R.id.search_bar);
             searchBarText.setText(query);
 
-            List<LocItem> searchResults = activity.searchResultAdapter.getLocItems();
+            List<LocItem> searchResults = activity.searchResultAdapter.getItems();
             for (LocItem locItem : searchResults) {
                 assertTrue(locItem.name.toLowerCase().contains(query));
             }
@@ -75,7 +71,7 @@ public class SearchResultsTests {
             searchBarText.setText(query);
 
             boolean error = false;
-            List<LocItem> searchResults = activity.searchResultAdapter.getLocItems();
+            List<LocItem> searchResults = activity.searchResultAdapter.getItems();
             for (LocItem locItem : searchResults) {
                 error = error || locItem.name.toLowerCase().contains(query);
             }
@@ -96,7 +92,7 @@ public class SearchResultsTests {
             searchBarText.setText(query);
 
             boolean error = false;
-            List<LocItem> searchResults = activity.searchResultAdapter.getLocItems();
+            List<LocItem> searchResults = activity.searchResultAdapter.getItems();
             for (LocItem locItem : searchResults) {
                 error = error || locItem.name.toLowerCase().contains(query);
             }

@@ -13,6 +13,9 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+/**
+ * Abstract database class for use with out Location Items and Edges
+ */
 @Database(entities = {LocItem.class}, version = 1)
 @TypeConverters(Converters.class)
 public abstract class LocDatabase extends RoomDatabase {
